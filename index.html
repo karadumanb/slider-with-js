@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="My blog is a responsive website where you can find informations about me as Baturay Serhat Karaduman.">
+
+  <link rel="icon" href="./resources/img/computer-geek.png">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="vendors/css/ionicons.min.css">
+  <link rel="stylesheet" type="text/css" href="vendors/css/animate.css">
+  <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+  <link rel="stylesheet" type="text/css" href="resources/css/queries.css">
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
+  <title>Baturay Karaduman</title>
+</head>
+
+<body>
+  <header id="home">
+    <nav>
+      <div class="row">
+        <div class="col-4">
+          <img src="resources/img/computer-geek.png" alt="Blog logo" class="logo">
+        </div>
+        <div class="col-8" style="float: right;">
+          <ul class="main-nav js--main-nav">
+            <li>
+              <a href="#home">Home</a>
+            </li>
+            <li>
+              <a href="#challenge">Challenge</a>
+            </li>
+            <li>
+              <a href="#quotations">Quotations</a>
+            </li>
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+          </ul>
+          <a class="mobile-nav-icon js--nav-icon">
+            <i class="ion-navicon-round"></i>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="description-text-box">
+      <h1>Hello, I am Baturay.
+        <br>Junior in software technology.</h1>
+      <a class="btn btn-full js--scroll-to-slider" href="#">Show me Challenge</a>
+      <a class="btn btn-ghost js--scroll-to-contact" href="#">Drop me a line</a>
+    </div>
+
+  </header>
+
+  <section class="section-slider js--section-slider js--wp-1">
+    <div class="row">
+      <h2>CODING CHALLENGE!</h2>
+    </div>
+    <div class="slider-wrapper">
+      <ul class="slider-showcase clearfix" id="challenge">
+        <div class="slider-filters">
+          <button class="toggle-slider" onclick="toggleSlider()">Stop Slider</button>
+          <button class="rewind-slider" onclick="toggleRewind()">Rewind Slider</button>
+          <button class="default-slider" onclick="defaultSlider()">Back To Default</button>
+          <input type="number" name="default-time" id="default-time" placeholder="in 2 seconds" onchange="setDefaultTime()">
+        </div>
+        <li class="active">
+          <figure class="slider-photo">
+            <img src="resources/img/1.jpg" alt="Graz University of Technology">
+          </figure>
+        </li>
+        <li>
+          <figure class="slider-photo">
+            <img src="resources/img/2.jpg" alt="Lake trip of Erasmus">
+          </figure>
+        </li>
+        <li>
+          <figure class="slider-photo">
+            <img src="resources/img/3.jpg" alt="ITU Library">
+          </figure>
+        </li>
+        <li>
+          <figure class="slider-photo">
+            <img src="resources/img/4.jpg" alt="ITU Graduation">
+          </figure>
+        </li>
+        <li>
+          <figure class="slider-photo">
+            <img src="resources/img/5.jpg" alt="Vienna Trip">
+          </figure>
+        </li>
+        <li>
+          <figure class="slider-photo">
+            <img src="resources/img/6.jpg" alt="Cagribey Anatolian High School">
+          </figure>
+        </li>
+        <li>
+          <figure class="slider-photo">
+            <img src="resources/img/7.jpg" alt="Collesium in Roma">
+          </figure>
+        </li>
+        <li>
+          <figure class="slider-photo">
+            <img src="resources/img/8.jpg" alt="A workcamp lanscape in Spain">
+          </figure>
+        </li>
+      </ul>
+      <div class="slider-arrows">
+        <button class="arrows left-arrow" onclick="nextSlide(false)">
+          <img src="resources/img/icons/arrow-right-grey.svg" alt="">
+        </button>
+        <button class="arrows right-arrow" onclick="nextSlide(true)">
+          <img src="resources/img/icons/arrow-right-grey.svg" alt="">
+        </button>
+      </div>
+      <span class="scrolling-dots" id="scrolling-dots">
+        <span class="dot active" id="dot-0"></span>
+        <span class="dot" id="dot-1"></span>
+        <span class="dot" id="dot-2"></span>
+        <span class="dot" id="dot-3"></span>
+        <span class="dot" id="dot-4"></span>
+        <span class="dot" id="dot-5"></span>
+        <span class="dot" id="dot-6"></span>
+        <span class="dot" id="dot-7"></span>
+      </span>
+    </div>
+  </section>
+
+
+  <section class="section-quotations" id="quotations">
+    <div class="row">
+      <h2>Few words about coding</h2>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <blockquote>
+          The computer programmer is a creator of universes for which he alone is the lawgiver. No playwright, no stage director, no
+          emperor, however powerful, has ever exercised such absolute authority to arrange a stage or field of battle and
+          to command such unswervingly dutiful actors or troops.
+          <cite>
+            <img src="resources/img/quotation-1.jpg" alt="Quotation 1 photo">Joseph Weizenbaum</cite>
+        </blockquote>
+      </div>
+      <div class="col-md-4">
+        <blockquote>
+          Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma - which is living with the
+          results of other people's thinking. Don't let the noise of other's opinions drown out your own inner voice. And
+          most important, have the courage to follow your heart and intuition. They somehow already know what you truly want
+          to become. Everything else is secondary.
+          <cite>
+            <img src="resources/img/quotation-2.jpg" alt="Quotation 2 photo">Steve Jobs</cite>
+        </blockquote>
+      </div>
+      <div class="col-md-4">
+        <blockquote>
+          Computer is not a device anymore. It is an extension of your mind and your gateway to other people. I don't expect my flight
+          to produce a generation of astronauts and cosmonauts back home, but I hope it will encourage people to pursue their
+          dreams.
+          <cite>
+            <img src="resources/img/quotation-3.png" alt="Quotation 3 photo">Mark Shuttleworth</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="section-form js--section-contact js--wp-2" id="contact">
+    <div class="row">
+      <h2>I'm happy to hear from you</h2>
+    </div>
+    <div class="row">
+      <form class="contact-form" id="contact-form" onsubmit="sendMail(event)">
+        <div class="row">
+          <div class="col-4">
+            <label for="name">Name</label>
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-input" name="name" id="name" placeholder="Your name" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label for="feedback">How did you find the challenge?</label>
+          </div>
+          <div class="col-8">
+            <select name="feedback" id="feedback" class="form-input">
+              <option value="Awesome" selected>Awesome</option>
+              <option value="Perfect">Perfect</option>
+              <option value="Very Well">Very Well</option>
+              <option value="Good enough">Good enough</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label>Drop me a line</label>
+          </div>
+          <div class="col-8">
+            <textarea name="message" placeholder="Your message" class="form-input"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-14 offset-4">
+            <input type="submit" name="submit" value="Send it!">
+          </div>
+        </div>
+
+      </form>
+      <div class="mail-feedback" id="mail-feedback">
+        <p>Thank you for evaluation!</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="row">
+      <div class="col-6">
+        <ul class="footer-nav">
+          <li>
+            <a>About me</a>
+          </li>
+          <li>
+            <a>Klarx</a>
+          </li>
+          <li>
+            <a>AIESEC</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-6">
+        <ul class="social-links">
+          <li>
+            <a href="https://www.facebook.com/baturay.karaduman" target="_blank">
+              <i class="ion-social-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/BaturayKaraduma" target="_blank">
+              <i class="ion-social-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://plus.google.com/110492073736890274179" target="_blank">
+              <i class="ion-social-googleplus"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/baturaykaraduman/" target="_blank">
+              <i class="ion-social-instagram"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/baturay-serhat-karaduman-635a35131/" target="_blank">
+              <i class="ion-social-linkedin"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <p>
+        Copyright &copy; 2018 by Baturay Karaduman. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="vendors/js/jquery.waypoints.min.js"></script>
+  <script src="resources/js/jquery-animations.js"></script>
+  <script src="resources/js/script.js"></script>
+
+</body>
+
+</html>
