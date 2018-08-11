@@ -42,17 +42,18 @@ function sendMail(e) {
 //global variables
 var elements,
   dots,
+  timer,
   sliderIndex = 0,
   animated = false
-  autoSlide = true,
+autoSlide = true,
   defaultTime = 2000,
   rewind = false;
 
-var getListElementsOfSlider = function() {
-  return document.getElementById('challenge').getElementsByTagName('li');
+var getListElementsOfSlider = function () {
+  return document.getElementById('challenge-slider').getElementsByTagName('li');
 };
 
-var getDots = function() {
+var getDots = function () {
   return document.getElementById('scrolling-dots').getElementsByClassName('dot');
 };
 
@@ -63,9 +64,9 @@ elements = getListElementsOfSlider();
 dots = getDots();
 
 //set event listener for all dots
-document.getElementById('scrolling-dots').addEventListener('click', (event)=>{
-  if(event.srcElement.classList.contains('dot')) {
-    if(event.srcElement.classList.contains('active')) return;
+document.getElementById('scrolling-dots').addEventListener('click', (event) => {
+  if (event.srcElement.classList.contains('dot')) {
+    if (event.srcElement.classList.contains('active')) return;
 
     //get id of clicked child
     //since it has id like dot-3, we will split it in two with '-'
@@ -75,11 +76,11 @@ document.getElementById('scrolling-dots').addEventListener('click', (event)=>{
   }
 });
 
-var nextSlide = function(next) {
+var nextSlide = function (next) {
   next ? changeSlide(sliderIndex + 1) : changeSlide(sliderIndex - 1);
 };
 
-var changeSlide = function(activeIndex) {
+var changeSlide = function (activeIndex) {
   if (!animated) {
     //In case user keeps clicking before animation ends
     animated = true;
@@ -131,36 +132,163 @@ var changeSlide = function(activeIndex) {
 
 
 //start autoSlide
-
-setInterval(() => {
-  if(autoSlide) {
-    if(!rewind) {
+var autoSlider = function () {
+  if (autoSlide) {
+    if (!rewind) {
       nextSlide(true);
     } else {
       nextSlide(false);
     }
   }
-}, defaultTime)
+}
 
-var toggleSlider = function() {
+//start or restarting timer
+var startTimer = function () {
+  timer = setInterval(autoSlider, defaultTime);
+}
+var restartTimer = function () {
+  clearInterval(timer);
+  startTimer();
+}
+//start on init
+startTimer();
+
+
+//filters start
+var toggleContents = function (contents) {
+  for (var content of contents) {
+    if (content.style.display === 'none') {
+      content.style.display = 'block'
+    } else {
+      content.style.display = 'none';
+    }
+  }
+}
+
+var toggleSlider = function () {
   autoSlide = !autoSlide;
+  var toggleSliderContent = document.getElementsByClassName('toggle-slider')[0].getElementsByTagName('p');
+  toggleContents(toggleSliderContent);
 }
 
-var toggleRewind = function() {
+var toggleRewind = function () {
   rewind = !rewind;
+  var rewindSliderContent = document.getElementsByClassName('rewind-slider')[0].getElementsByTagName('p');
+  toggleContents(rewindSliderContent);
 }
 
-var defaultSlider = function() {
+var setAutostart = function () {
+  if (document.getElementById('autostart-option').checked) {
+    localStorage.setItem('autostart', 'true');
+  } else {
+    localStorage.setItem('autostart', 'false');
+  }
+}
+
+var setToDefault = function () {
   autoSlide = true;
   rewind = false;
   defaultTime = 2000;
+  restartTimer();
+  for (var content of document.getElementsByClassName('defaulted-content')) {
+    content.getElementsByTagName('p')[0].style.display = 'block';
+    content.getElementsByTagName('p')[1].style.display = 'none';
+  }
+  document.getElementById('default-time').value = '';
 }
 
-var setDefaultTime = function() {
+var setDefaultTime = function () {
+  if (document.getElementById('default-time').value === '') {
+    setToDefault();
+  }
   var value = parseInt(document.getElementById('default-time').value);
-  console.log(value)
-  if(value === 0) {
+  if (value === 0 || typeof (value) !== 'number') {
     return;
   }
-  defaultTime = value*1000;
+  defaultTime = value * 1000;
+  restartTimer();
+}
+//filters end
+
+//image resizing
+var resizeImage = function () {
+  var resizedElement = document.getElementById('challenge-slider').classList;
+  resizedElement.toggle('full-screen');
+  if (resizedElement.contains('full-screen')) {
+    document.getElementsByTagName('html')[0].style.overflow = 'hidden';
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+    document.getElementById('home').style.display = 'none';
+    document.getElementById('quotations').style.zIndex = '-1';
+    document.getElementById('contact').style.zIndex = '-1';
+  } else {
+    document.getElementsByTagName('html')[0].style.overflow = 'auto';
+    document.getElementsByTagName('body')[0].style.overflow = 'auto';
+    document.getElementById('home').style.display = 'block';
+    document.getElementById('quotations').style.zIndex = '1';
+    document.getElementById('contact').style.zIndex = '1';
+  }
+}
+
+var onPhotoUpload = function (event) {
+  var filePath,
+    files = event.target.files;
+
+  if (files[0].type === 'image/png' || files[0].type === 'image/jpeg' || files[0].type === 'image/jpg') {
+    var fileReader = new FileReader();
+    fileReader.onload = function () {
+      filePath = fileReader.result;
+
+      //add image
+      var uploadedPhotoElement = createNewImageElement(filePath);
+      document.getElementById('challenge-slider').insertAdjacentElement('beforeend', uploadedPhotoElement);
+
+      //Add dot
+      var newDot = createNewDotElement(elements.length - 1);
+      document.getElementById('scrolling-dots').insertAdjacentElement('beforeend', newDot);
+
+      changeSlide(elements.length - 1);
+    }
+    fileReader.readAsDataURL(files[0]);
+  } else {
+    document.getElementById('error-message').innerHTML = 'File types have to be jpg, jpeg or png.';
+    setTimeout(() => {
+      document.getElementById('error-message').innerHTML = '';
+    }, 4000)
+  }
+
+}
+
+var createNewImageElement = function (imageSrc) {
+  var newImageElement = document.createElement("li");
+  var child = document.createElement("figure");
+  var image = document.createElement("img");
+  child.classList.add('slider-photo');
+  image.src = imageSrc;
+  child.appendChild(image);
+  newImageElement.appendChild(child);
+  return newImageElement;
+}
+
+var createNewDotElement = function (dotId) {
+  var newDot = document.createElement("span");
+  newDot.classList.add('dot');
+  newDot.id = 'dot-' + dotId;
+  return newDot;
+}
+
+if (localStorage.getItem('autostart') !== null) {
+  if (localStorage.getItem('autostart') === 'false') {
+    toggleSlider();
+    document.getElementById('autostart-option').checked = false;
+  }
+}
+
+
+var removeImage = function () {
+  var currentIndex = sliderIndex;
+  changeSlide(sliderIndex);
+  var parent = document.getElementById('challenge-slider');
+  parent.removeChild(elements[currentIndex]);
+  var parent = document.getElementById('scrolling-dots');
+  parent.removeChild(dots[currentIndex]);
 }

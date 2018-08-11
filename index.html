@@ -20,10 +20,10 @@
   <header id="home">
     <nav>
       <div class="row">
-        <div class="col-4">
+        <div class="col-3">
           <img src="resources/img/computer-geek.png" alt="Blog logo" class="logo">
         </div>
-        <div class="col-8" style="float: right;">
+        <div class="col-9" style="float: right;">
           <ul class="main-nav js--main-nav">
             <li>
               <a href="#home">Home</a>
@@ -58,13 +58,30 @@
       <h2>CODING CHALLENGE!</h2>
     </div>
     <div class="slider-wrapper">
-      <ul class="slider-showcase clearfix" id="challenge">
-        <div class="slider-filters">
-          <button class="toggle-slider" onclick="toggleSlider()">Stop Slider</button>
-          <button class="rewind-slider" onclick="toggleRewind()">Rewind Slider</button>
-          <button class="default-slider" onclick="defaultSlider()">Back To Default</button>
-          <input type="number" name="default-time" id="default-time" placeholder="in 2 seconds" onchange="setDefaultTime()">
-        </div>
+      <div class="slider-filters">
+        <button class="toggle-slider defaulted-content" onclick="toggleSlider()">
+          <p style="display: block;">Stop Slider
+            <i class="ion-pause"></i>
+          </p>
+          <p style="display: none;">Start Slider
+            <i class="ion-play"></i>
+          </p>
+        </button>
+        <button class="rewind-slider defaulted-content" onclick="toggleRewind()">
+          <p style="display: block;">Rewind Slider
+            <i class="ion-ios-rewind"></i>
+          </p>
+          <p style="display: none;">Move Forward
+            <i class="ion-ios-fastforward"></i>
+          </p>
+        </button>
+        <button class="default-slider" onclick="setToDefault()">Back To Default</button>
+        <input type="number" name="default-time" id="default-time" placeholder="in 2 seconds" onkeyup="setDefaultTime()">
+        <label>
+          <input type="checkbox" name="autostart-option" id="autostart-option" onchange="setAutostart()" checked> Start slider automatically
+        </label>
+      </div>
+      <ul class="slider-showcase clearfix" id="challenge-slider">
         <li class="active">
           <figure class="slider-photo">
             <img src="resources/img/1.jpg" alt="Graz University of Technology">
@@ -105,6 +122,7 @@
             <img src="resources/img/8.jpg" alt="A workcamp lanscape in Spain">
           </figure>
         </li>
+        <i class="ion-arrow-resize" onclick="resizeImage()"></i>
       </ul>
       <div class="slider-arrows">
         <button class="arrows left-arrow" onclick="nextSlide(false)">
@@ -124,6 +142,15 @@
         <span class="dot" id="dot-6"></span>
         <span class="dot" id="dot-7"></span>
       </span>
+      <button type="button" class="add-more">
+        <label>
+          Add More
+          <input type="file" name="add-more-input" id="add-more-input" onchange="onPhotoUpload(event)">
+          <i class="ion-plus"></i>
+        </label>
+      </button>
+      <button class="remove-image" onclick="removeImage()">Remove <i class="ion-ios-trash"></i></button>
+      <p id="error-message"></p>
     </div>
   </section>
 
