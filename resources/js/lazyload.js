@@ -1,6 +1,6 @@
 /* lazy loading */
 
-const images = document.querySelectorAll('#challenge-slider img');
+const images = document.querySelectorAll('#challenge-slider li img');
 
 const options = {
   // If the image gets within 50px in the Y axis, start the download.

@@ -10,7 +10,7 @@ var elements,
   timer,
   sliderIndex = 0,
   animated = false
-autoSlide = true,
+  autoSlide = true,
   defaultTime = 4000,
   rewind = false;
 
@@ -215,10 +215,7 @@ var onPhotoUpload = function (event) {
     }
     fileReader.readAsDataURL(files[0]);
   } else {
-    document.getElementById('error-message').innerHTML = 'File types have to be jpg, jpeg or png.';
-    setTimeout(() => {
-      document.getElementById('error-message').innerHTML = '';
-    }, 4000)
+    throwError('File types have to be jpg, jpeg or png.');
   }
 
 }
@@ -249,16 +246,37 @@ if (localStorage.getItem('autostart') !== null) {
   }
 }
 
-
+var removing = false;
 var removeImage = function () {
-  var currentIndex = sliderIndex;
-  changeSlide(sliderIndex);
-  var parent = document.getElementById('challenge-slider');
-  parent.removeChild(elements[currentIndex]);
-  var parent = document.getElementById('scrolling-dots');
-  parent.removeChild(dots[currentIndex]);
+  if(elements.length === 1) {
+    throwError('You are not allowed to delete all in slider');
+    return;
+  }
+  if(!removing) {
+    removing = true;
+    var currentIndex = sliderIndex;
+    nextSlide(true);
+    setTimeout(()=>{
+      var parent = document.getElementById('challenge-slider');
+      parent.removeChild(elements[currentIndex]);
+      var parent = document.getElementById('scrolling-dots');
+      parent.removeChild(dots[currentIndex]);
+      for(var i = 0; i < dots.length; i++) {
+        dots[i].id = 'dot-' + i;
+      }
+      if(sliderIndex => elements.length) {
+        sliderIndex = 0;
+      } else {
+        sliderIndex--;
+      }
+      removing = false;
+    }, 900);
+  }
 }
 
-
-
-
+var throwError = function(errorText) {
+  document.getElementById('error-message').innerHTML = errorText;
+  setTimeout(() => {
+    document.getElementById('error-message').innerHTML = '';
+  }, 4000)
+}
