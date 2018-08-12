@@ -29,7 +29,7 @@
               <a href="#home">Home</a>
             </li>
             <li>
-              <a href="#challenge">Challenge</a>
+              <a href="#challenge-slider">Challenge</a>
             </li>
             <li>
               <a href="#quotations">Quotations</a>
@@ -76,7 +76,7 @@
           </p>
         </button>
         <button class="default-slider" onclick="setToDefault()">Back To Default</button>
-        <input type="number" name="default-time" id="default-time" placeholder="in 2 seconds" onkeyup="setDefaultTime()">
+        <input type="number" name="default-time" id="default-time" placeholder="in 4 seconds" onkeyup="setDefaultTime()">
         <label>
           <input type="checkbox" name="autostart-option" id="autostart-option" onchange="setAutostart()" checked> Start slider automatically
         </label>
@@ -84,42 +84,43 @@
       <ul class="slider-showcase clearfix" id="challenge-slider">
         <li class="active">
           <figure class="slider-photo">
-            <img src="resources/img/1.jpg" alt="Graz University of Technology">
+            <img data-src="resources/img/1.jpg" class="lazy" src="resources/img/blank.gif" alt="Graz University of Technology" title="Graz University in Austria">
           </figure>
         </li>
         <li>
           <figure class="slider-photo">
-            <img src="resources/img/2.jpg" alt="Lake trip of Erasmus">
+            <img data-src="resources/img/2.jpg" class="lazy" src="resources/img/blank.gif" alt="Lake trip of Erasmus" title="Bled lake trip in Slovakia during Erasmus">
           </figure>
         </li>
         <li>
           <figure class="slider-photo">
-            <img src="resources/img/3.jpg" alt="ITU Library">
+            <img data-src="resources/img/4.jpg" class="lazy" src="resources/img/blank.gif" alt="ITU Graduation" title="Istanbul Technical University Graduation">
           </figure>
         </li>
         <li>
           <figure class="slider-photo">
-            <img src="resources/img/4.jpg" alt="ITU Graduation">
+            <img data-src="http://www.oktayaras.com/images/KutuphaneFoto/IEBK200410000665.jpg" class="lazy" src="resources/img/blank.gif" alt="External Link ITU Library" title="External Link ITU Library">
           </figure>
         </li>
         <li>
           <figure class="slider-photo">
-            <img src="resources/img/5.jpg" alt="Vienna Trip">
+            <img data-src="https://img.fcbayern.com/image/fetch/f_auto,h_768,q_auto:good,w_1366/https://fcbayern.com/binaries/content/gallery/allianz-arena/media/images/allianz-arena/bj_6975.jpg/bj_6975.jpg/fcbhippo%253Axtralargesixteentonine%3Fv%3D1461661895076" class="lazy" src="resources/img/blank.gif" alt="External link alianz arena"
+            title="External link alianz arena">
           </figure>
         </li>
         <li>
           <figure class="slider-photo">
-            <img src="resources/img/6.jpg" alt="Cagribey Anatolian High School">
+            <img data-src="http://res.cloudinary.com/christekh/image/upload/c_scale,h_300,w_500/v1499705400/fi7mytperytdqt9hdcvx.jpg" class="lazy" src="resources/img/blank.gif" alt="External image cats" title="External link cats">
           </figure>
         </li>
         <li>
           <figure class="slider-photo">
-            <img src="resources/img/7.jpg" alt="Collesium in Roma">
+            <img data-src="http://res.cloudinary.com/christekh/image/upload/c_scale,h_300,w_500/v1505391130/wynand-van-poortvliet-364366_gsvyby.jpg" class="lazy" src="resources/img/blank.gif" alt="External image penguen" title="External link penguen">
           </figure>
         </li>
         <li>
           <figure class="slider-photo">
-            <img src="resources/img/8.jpg" alt="A workcamp lanscape in Spain">
+            <img data-src="https://i.ytimg.com/vi/0etTzsUIJO0/maxresdefault.jpg" class="lazy" src="resources/img/blank.gif" alt="External image munchen" title="External link munchen">
           </figure>
         </li>
         <i class="ion-arrow-resize" onclick="resizeImage()"></i>
@@ -296,6 +297,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="vendors/js/jquery.waypoints.min.js"></script>
   <script src="resources/js/jquery-animations.js"></script>
+  <script src="resources/js/lazyload.js"></script>
+  <script src="resources/js/email.js"></script>
   <script src="resources/js/script.js"></script>
 
 </body>
