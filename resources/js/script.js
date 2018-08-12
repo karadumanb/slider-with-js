@@ -14,10 +14,13 @@ var elements,
   defaultTime = 4000,
   rewind = false;
 
+
+//returns all elements in unorderlist of the slider
 var getListElementsOfSlider = function () {
   return document.getElementById('challenge-slider').getElementsByTagName('li');
 };
 
+//returns all indicating dots of slider
 var getDots = function () {
   return document.getElementById('scrolling-dots').getElementsByClassName('dot');
 };
@@ -41,10 +44,12 @@ document.getElementById('scrolling-dots').addEventListener('click', (event) => {
   }
 });
 
+//if next is true go to the next picture, else go to the previous one
 var nextSlide = function (next) {
   next ? changeSlide(sliderIndex + 1) : changeSlide(sliderIndex - 1);
 };
 
+//this function calls with index to be activated
 var changeSlide = function (activeIndex) {
   if (!animated) {
     //In case user keeps clicking before animation ends
@@ -56,7 +61,7 @@ var changeSlide = function (activeIndex) {
     if (elements[sliderIndex].classList.contains('active')) {
 
       //see if we will go to next element or previous and will go to the right or left
-      if (sliderIndex < activeIndex) {
+      if (sliderIndex > activeIndex) {
         animationOut = 'fadeOutRight';
         animationIn = 'fadeInLeft';
       } else {
@@ -130,6 +135,7 @@ var toggleContents = function (contents) {
   }
 }
 
+//these functions toggle sliders and rewinder filters
 var toggleSlider = function () {
   autoSlide = !autoSlide;
   var toggleSliderContent = document.getElementsByClassName('toggle-slider')[0].getElementsByTagName('p');
@@ -142,6 +148,7 @@ var toggleRewind = function () {
   toggleContents(rewindSliderContent);
 }
 
+//auto starts is being set in the local storage
 var setAutostart = function () {
   if (document.getElementById('autostart-option').checked) {
     localStorage.setItem('autostart', 'true');
@@ -150,6 +157,7 @@ var setAutostart = function () {
   }
 }
 
+//set all to the defalut values
 var setToDefault = function () {
   autoSlide = true;
   rewind = false;
@@ -162,6 +170,7 @@ var setToDefault = function () {
   document.getElementById('default-time').value = '';
 }
 
+//our default time is changed here and converted in miliseconds
 var setDefaultTime = function () {
   if (document.getElementById('default-time').value === '') {
     setToDefault();
@@ -179,6 +188,7 @@ var setDefaultTime = function () {
 var resizeImage = function () {
   var resizedElement = document.getElementById('slider-showcase').classList;
   resizedElement.toggle('full-screen');
+  //we add all styles in order to get full-screen without any issue
   if (resizedElement.contains('full-screen')) {
     document.getElementsByTagName('html')[0].style.overflow = 'hidden';
     document.getElementsByTagName('body')[0].style.overflow = 'hidden';
@@ -198,20 +208,20 @@ var onPhotoUpload = function (event) {
   var filePath,
     files = event.target.files;
 
-  if(files[0].type) {
+  if (files[0].type) {
     if (files[0].type === 'image/png' || files[0].type === 'image/jpeg' || files[0].type === 'image/jpg') {
       var fileReader = new FileReader();
       fileReader.onload = function () {
         filePath = fileReader.result;
-  
+
         //add image
         var uploadedPhotoElement = createNewImageElement(filePath);
         document.getElementById('challenge-slider').insertAdjacentElement('beforeend', uploadedPhotoElement);
-  
+
         //Add dot
         var newDot = createNewDotElement(elements.length - 1);
         document.getElementById('scrolling-dots').insertAdjacentElement('beforeend', newDot);
-  
+
         changeSlide(elements.length - 1);
       }
       fileReader.readAsDataURL(files[0]);
@@ -221,6 +231,7 @@ var onPhotoUpload = function (event) {
   }
 }
 
+//creates html element for images list in the slider
 var createNewImageElement = function (imageSrc) {
   var newImageElement = document.createElement("li");
   var child = document.createElement("figure");
@@ -232,6 +243,7 @@ var createNewImageElement = function (imageSrc) {
   return newImageElement;
 }
 
+//creates html element for dot list in the slider
 var createNewDotElement = function (dotId) {
   var newDot = document.createElement("span");
   newDot.classList.add('dot');
@@ -247,29 +259,30 @@ if (localStorage.getItem('autostart') !== null) {
   }
 }
 
+//if removing still goes on, do not enter in the function
 var removing = false;
 var removeImage = function () {
-  if(elements.length === 1) {
+  if (elements.length === 1) {
     throwError('You are not allowed to delete all in the slider');
     return;
   }
-  if(!removing) {
+  if (!removing) {
     removing = true;
     var currentIndex = sliderIndex;
     nextSlide(true);
-    setTimeout(()=>{
+    setTimeout(() => {
       var parent = document.getElementById('challenge-slider');
       parent.removeChild(elements[currentIndex]);
       var parent = document.getElementById('scrolling-dots');
       parent.removeChild(dots[currentIndex]);
 
       //set ids
-      for(var i = 0; i < dots.length; i++) {
+      for (var i = 0; i < dots.length; i++) {
         dots[i].id = 'dot-' + i;
       }
-      
+
       //set active elements index
-      if(sliderIndex > elements.length || sliderIndex === 0) {
+      if (sliderIndex > elements.length || sliderIndex === 0) {
         sliderIndex = 0;
       } else {
         sliderIndex--;
@@ -279,22 +292,24 @@ var removeImage = function () {
   }
 }
 
-var throwError = function(errorText) {
+//throws an error for the slider
+var throwError = function (errorText) {
   document.getElementById('error-message').innerHTML = errorText;
   setTimeout(() => {
     document.getElementById('error-message').innerHTML = '';
   }, 4000)
 }
 
-var editImage = function() {
+//replace uploaded image to current image
+var editImage = function () {
   var filePath,
-  files = event.target.files;
-  if(files[0].type) {
+    files = event.target.files;
+  if (files[0].type) {
     if (files[0].type === 'image/png' || files[0].type === 'image/jpeg' || files[0].type === 'image/jpg') {
       var fileReader = new FileReader();
       fileReader.onload = function () {
         filePath = fileReader.result;
-  
+
         elements[sliderIndex].getElementsByTagName('img')[0].src = filePath;
       }
       fileReader.readAsDataURL(files[0]);
@@ -306,8 +321,8 @@ var editImage = function() {
 }
 
 //In case autoslider goes on and by mistake we edit next image
-var onImageChangeStopSlider = function() {
-  if(autoSlide) {
+var onImageChangeStopSlider = function () {
+  if (autoSlide) {
     toggleSlider();
   }
 }
