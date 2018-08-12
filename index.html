@@ -82,52 +82,54 @@
         </label>
       </div>
       <div class="centerize-block">
-        <ul class="slider-showcase" id="challenge-slider">
-          <li class="active">
-            <figure class="slider-photo">
-              <img data-src="resources/img/1.jpg" class="lazy" src="resources/img/blank.gif" alt="Graz University of Technology" title="Graz University in Austria">
-            </figure>
-          </li>
-          <li>
-            <figure class="slider-photo">
-              <img data-src="resources/img/2.jpg" class="lazy" src="resources/img/blank.gif" alt="Lake trip of Erasmus" title="Bled lake trip in Slovakia during Erasmus">
-            </figure>
-          </li>
-          <li>
-            <figure class="slider-photo">
-              <img data-src="resources/img/4.jpg" class="lazy" src="resources/img/blank.gif" alt="ITU Graduation" title="Istanbul Technical University Graduation">
-            </figure>
-          </li>
-          <li>
-            <figure class="slider-photo">
-              <img data-src="http://www.oktayaras.com/images/KutuphaneFoto/IEBK200410000665.jpg" class="lazy" src="resources/img/blank.gif"
-                alt="External Link ITU Library" title="External Link ITU Library">
-            </figure>
-          </li>
-          <li>
-            <figure class="slider-photo">
-              <img data-src="https://img.fcbayern.com/image/fetch/f_auto,h_768,q_auto:good,w_1366/https://fcbayern.com/binaries/content/gallery/allianz-arena/media/images/allianz-arena/bj_6975.jpg/bj_6975.jpg/fcbhippo%253Axtralargesixteentonine%3Fv%3D1461661895076"
-                class="lazy" src="resources/img/blank.gif" alt="External link alianz arena" title="External link alianz arena">
-            </figure>
-          </li>
-          <li>
-            <figure class="slider-photo">
-              <img data-src="http://res.cloudinary.com/christekh/image/upload/c_scale,h_300,w_500/v1499705400/fi7mytperytdqt9hdcvx.jpg"
-                class="lazy" src="resources/img/blank.gif" alt="External image cats" title="External link cats">
-            </figure>
-          </li>
-          <li>
-            <figure class="slider-photo">
-              <img data-src="http://res.cloudinary.com/christekh/image/upload/c_scale,h_300,w_500/v1505391130/wynand-van-poortvliet-364366_gsvyby.jpg"
-                class="lazy" src="resources/img/blank.gif" alt="External image penguen" title="External link penguen">
-            </figure>
-          </li>
-          <li>
-            <figure class="slider-photo">
-              <img data-src="https://i.ytimg.com/vi/0etTzsUIJO0/maxresdefault.jpg" class="lazy" src="resources/img/blank.gif" alt="External image munchen"
-                title="External link munchen">
-            </figure>
-          </li>
+        <div class="slider-showcase" id="slider-showcase">
+          <ul id="challenge-slider">
+            <li class="active">
+              <figure class="slider-photo">
+                <img data-src="resources/img/1.jpg" class="lazy" src="resources/img/blank.gif" alt="Graz University of Technology" title="Graz University in Austria">
+              </figure>
+            </li>
+            <li>
+              <figure class="slider-photo">
+                <img data-src="resources/img/2.jpg" class="lazy" src="resources/img/blank.gif" alt="Lake trip of Erasmus" title="Bled lake trip in Slovakia during Erasmus">
+              </figure>
+            </li>
+            <li>
+              <figure class="slider-photo">
+                <img data-src="resources/img/4.jpg" class="lazy" src="resources/img/blank.gif" alt="ITU Graduation" title="Istanbul Technical University Graduation">
+              </figure>
+            </li>
+            <li>
+              <figure class="slider-photo">
+                <img data-src="http://www.oktayaras.com/images/KutuphaneFoto/IEBK200410000665.jpg" class="lazy" src="resources/img/blank.gif"
+                  alt="External Link ITU Library" title="External Link ITU Library">
+              </figure>
+            </li>
+            <li>
+              <figure class="slider-photo">
+                <img data-src="https://img.fcbayern.com/image/fetch/f_auto,h_768,q_auto:good,w_1366/https://fcbayern.com/binaries/content/gallery/allianz-arena/media/images/allianz-arena/bj_6975.jpg/bj_6975.jpg/fcbhippo%253Axtralargesixteentonine%3Fv%3D1461661895076"
+                  class="lazy" src="resources/img/blank.gif" alt="External link alianz arena" title="External link alianz arena">
+              </figure>
+            </li>
+            <li>
+              <figure class="slider-photo">
+                <img data-src="http://res.cloudinary.com/christekh/image/upload/c_scale,h_300,w_500/v1499705400/fi7mytperytdqt9hdcvx.jpg"
+                  class="lazy" src="resources/img/blank.gif" alt="External image cats" title="External link cats">
+              </figure>
+            </li>
+            <li>
+              <figure class="slider-photo">
+                <img data-src="http://res.cloudinary.com/christekh/image/upload/c_scale,h_300,w_500/v1505391130/wynand-van-poortvliet-364366_gsvyby.jpg"
+                  class="lazy" src="resources/img/blank.gif" alt="External image penguen" title="External link penguen">
+              </figure>
+            </li>
+            <li>
+              <figure class="slider-photo">
+                <img data-src="https://i.ytimg.com/vi/0etTzsUIJO0/maxresdefault.jpg" class="lazy" src="resources/img/blank.gif" alt="External image munchen"
+                  title="External link munchen">
+              </figure>
+            </li>
+          </ul>
           <i class="ion-arrow-resize" onclick="resizeImage()"></i>
           <div class="slider-arrows">
             <button class="arrows left-arrow" onclick="nextSlide(false)">
@@ -137,7 +139,7 @@
               <img src="resources/img/icons/arrow-right-grey.svg" alt="">
             </button>
           </div>
-        </ul>
+        </div>
       </div>
       <span class="scrolling-dots" id="scrolling-dots">
         <span class="dot active" id="dot-0"></span>
@@ -158,6 +160,13 @@
       </button>
       <button class="remove-image" onclick="removeImage()">Remove
         <i class="ion-ios-trash"></i>
+      </button>
+      <button class="edit-image">
+        <label>
+          Edit
+          <input type="file" name="edit-image-input" id="edit-image-input" onchange="editImage()" onclick="onImageChangeStopSlider()">
+          <i class="ion-edit"></i>
+        </label>
       </button>
       <p id="error-message"></p>
     </div>

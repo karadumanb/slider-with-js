@@ -347,7 +347,7 @@ section.section-slider {
     margin-bottom: 20px;
 }
 
-.slider-filters button, .slider-filters > input, .add-more, .remove-image {
+.slider-filters button, .slider-filters > input, .add-more, .remove-image, .edit-image {
   padding: 5px 10px;
   border: 0;
   border-radius: 5px;
@@ -366,7 +366,7 @@ section.section-slider {
     border-radius: 5px;
 }
 
-.slider-filters button, .remove-image {
+.slider-filters button, .remove-image, .edit-image {
     cursor: pointer;
 }
 
@@ -383,30 +383,38 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 
-.slider-filters button:hover, .add-more:hover, .remove-image:hover {
+.slider-filters button:hover, .add-more:hover, .remove-image:hover, .edit-image:hover {
   -webkit-box-shadow: 10px 10px 46px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 46px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 46px 0px rgba(0, 0, 0, 0.75);
   background-color: #c3c3c3;
 }
 
-.add-more {
+.add-more, .remove-image, .edit-image {
     margin-top: 10px;
     position: relative;
     cursor: pointer;
 }
 
-.add-more i{
+.add-more, .edit-image {
+  padding: 0;
+}
+
+.add-more i, .remove-image i, .edit-image i{
     margin-left: 5px;
 }
 
-.add-more input{
+.add-more input, .remove-image input, .edit-image input{
     display: none;
 }
 
-.add-more label{
+.add-more label, .remove-image label, .edit-image label{
    margin-bottom: 0;
    cursor: pointer;
+}
+
+.add-more label, .edit-image label{
+  padding: 5px 10px;
 }
 
 .slider-wrapper {

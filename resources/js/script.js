@@ -177,7 +177,7 @@ var setDefaultTime = function () {
 
 //image resizing
 var resizeImage = function () {
-  var resizedElement = document.getElementById('challenge-slider').classList;
+  var resizedElement = document.getElementById('slider-showcase').classList;
   resizedElement.toggle('full-screen');
   if (resizedElement.contains('full-screen')) {
     document.getElementsByTagName('html')[0].style.overflow = 'hidden';
@@ -198,26 +198,27 @@ var onPhotoUpload = function (event) {
   var filePath,
     files = event.target.files;
 
-  if (files[0].type === 'image/png' || files[0].type === 'image/jpeg' || files[0].type === 'image/jpg') {
-    var fileReader = new FileReader();
-    fileReader.onload = function () {
-      filePath = fileReader.result;
-
-      //add image
-      var uploadedPhotoElement = createNewImageElement(filePath);
-      document.getElementById('challenge-slider').insertAdjacentElement('beforeend', uploadedPhotoElement);
-
-      //Add dot
-      var newDot = createNewDotElement(elements.length - 1);
-      document.getElementById('scrolling-dots').insertAdjacentElement('beforeend', newDot);
-
-      changeSlide(elements.length - 1);
+  if(files[0].type) {
+    if (files[0].type === 'image/png' || files[0].type === 'image/jpeg' || files[0].type === 'image/jpg') {
+      var fileReader = new FileReader();
+      fileReader.onload = function () {
+        filePath = fileReader.result;
+  
+        //add image
+        var uploadedPhotoElement = createNewImageElement(filePath);
+        document.getElementById('challenge-slider').insertAdjacentElement('beforeend', uploadedPhotoElement);
+  
+        //Add dot
+        var newDot = createNewDotElement(elements.length - 1);
+        document.getElementById('scrolling-dots').insertAdjacentElement('beforeend', newDot);
+  
+        changeSlide(elements.length - 1);
+      }
+      fileReader.readAsDataURL(files[0]);
+    } else {
+      throwError('File types have to be jpg, jpeg or png.');
     }
-    fileReader.readAsDataURL(files[0]);
-  } else {
-    throwError('File types have to be jpg, jpeg or png.');
   }
-
 }
 
 var createNewImageElement = function (imageSrc) {
@@ -249,7 +250,7 @@ if (localStorage.getItem('autostart') !== null) {
 var removing = false;
 var removeImage = function () {
   if(elements.length === 1) {
-    throwError('You are not allowed to delete all in slider');
+    throwError('You are not allowed to delete all in the slider');
     return;
   }
   if(!removing) {
@@ -261,10 +262,14 @@ var removeImage = function () {
       parent.removeChild(elements[currentIndex]);
       var parent = document.getElementById('scrolling-dots');
       parent.removeChild(dots[currentIndex]);
+
+      //set ids
       for(var i = 0; i < dots.length; i++) {
         dots[i].id = 'dot-' + i;
       }
-      if(sliderIndex => elements.length) {
+      
+      //set active elements index
+      if(sliderIndex > elements.length || sliderIndex === 0) {
         sliderIndex = 0;
       } else {
         sliderIndex--;
@@ -279,4 +284,30 @@ var throwError = function(errorText) {
   setTimeout(() => {
     document.getElementById('error-message').innerHTML = '';
   }, 4000)
+}
+
+var editImage = function() {
+  var filePath,
+  files = event.target.files;
+  if(files[0].type) {
+    if (files[0].type === 'image/png' || files[0].type === 'image/jpeg' || files[0].type === 'image/jpg') {
+      var fileReader = new FileReader();
+      fileReader.onload = function () {
+        filePath = fileReader.result;
+  
+        elements[sliderIndex].getElementsByTagName('img')[0].src = filePath;
+      }
+      fileReader.readAsDataURL(files[0]);
+    } else {
+      throwError('File types have to be jpg, jpeg or png.');
+    }
+  }
+
+}
+
+//In case autoslider goes on and by mistake we edit next image
+var onImageChangeStopSlider = function() {
+  if(autoSlide) {
+    toggleSlider();
+  }
 }
